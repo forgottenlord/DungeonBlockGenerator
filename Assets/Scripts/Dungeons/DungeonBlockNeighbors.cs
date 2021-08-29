@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DungeonAssault
+namespace DungeonAssault.Dungeons
 {
     [System.Flags]
     public enum DungeonBlockNeighbors : byte

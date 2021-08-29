@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DungeonAssault
+namespace DungeonAssault.Dungeons
 {
     public enum DungeonBlockRotation : byte
     {
