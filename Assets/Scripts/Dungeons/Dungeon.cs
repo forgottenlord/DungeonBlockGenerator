@@ -15,6 +15,9 @@ namespace DungeonAssault.Dungeons
         [SerializeField]
         public byte BlocksCount;
         public DungeonBlock[,] blocks;
+        [Range(.1f, 1f)]
+        [SerializeField]
+        public float scaleFactor;
 
         public GameObject[] blocksS;
         public GameObject[] blocksL;
@@ -26,6 +29,7 @@ namespace DungeonAssault.Dungeons
         {
             ShowDungeon(CorrectDungeon(GenerateDungeon()));
         }
+
         /// <summary>
         /// Заполняем комнаты черепашкой.
         /// </summary>
@@ -128,6 +132,8 @@ namespace DungeonAssault.Dungeons
         {
             int num = 0;
 
+
+            Vector3 entranceShift = new Vector3(blockList[0].x * blockX_MeshSize.x, 0, blockList[0].y * blockX_MeshSize.z);
             for (int n = 0; n < blockList.Count; n++)
             {
                 var b = blockList[n];
@@ -142,7 +148,9 @@ namespace DungeonAssault.Dungeons
                 }
                 newBlock.name = newBlock.name.Replace("(Clone)", (num++).ToString() + "   " + b.code + "  " +
                     System.Convert.ToString((byte)(b.code), 2).PadLeft(4, '0') + "   " + b.t + "   " +b.r);
-                newBlock.localPosition = new Vector3(b.x * blockX_MeshSize.x, 0, b.y * blockX_MeshSize.z);
+                newBlock.localPosition = new Vector3(b.x * blockX_MeshSize.x, 0, b.y * blockX_MeshSize.z)
+                    - entranceShift;
+                newBlock.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
                 switch (b.r)
                 {
                     case DungeonBlockRotation.r_0: newBlock.localEulerAngles = new Vector3(0, 0, 0); break;
